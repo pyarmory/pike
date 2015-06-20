@@ -23,7 +23,7 @@ setup(
     ],
 
     keywords='plugin management modules',
-    packages=find_packages(exclude=['contrib', 'docs', 'spec*']),
+    packages=find_packages(exclude=['contrib', 'docs', 'test*']),
     install_requires=[],
     package_data={},
     data_files=[],
