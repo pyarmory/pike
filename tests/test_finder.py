@@ -1,19 +1,13 @@
 import os
 
 from pike.finder import PikeFinder
-from tests import utils
 
 
 class TestFinder(object):
     def setup_method(self, method):
-        # self.temp_folder = utils.make_tmpdir()
         partial_path, _ = os.path.split(__file__)
         finder_path, _ = os.path.split(partial_path)
         self.finder = PikeFinder([finder_path])
-
-    def teardown_method(self, method):
-        # utils.remove_dir(self.temp_folder)
-        pass
 
     def test_module_name_to_filename(self):
         res = self.finder.module_name_to_filename('pike.finder')
