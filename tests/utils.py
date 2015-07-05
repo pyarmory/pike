@@ -17,12 +17,9 @@ def write_file(filename, content=''):
         fp.write(content)
 
 
-def create_working_package(location):
-    pkg_location = os.path.join(location, 'pike_tests')
-    subpkg_location = os.path.join(pkg_location, 'sub_package')
-
-    os.makedirs(subpkg_location)
+def create_working_package(location, name=None):
+    pkg_location = os.path.join(location, name or 'pike_tests')
+    os.makedirs(pkg_location)
     write_file(os.path.join(pkg_location, '__init__.py'))
-    write_file(os.path.join(subpkg_location, '__init__.py'))
 
     return pkg_location
