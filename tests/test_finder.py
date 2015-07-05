@@ -24,3 +24,7 @@ class TestFinder(object):
         module_path = self.finder.get_import_filename(filename)
 
         assert module_path.endswith('tests{0}__init__.py'.format(os.path.sep))
+
+    def test_no_loader_returned_if_module_not_in_scope(self):
+        loader = self.finder.find_module('bam')
+        assert not loader
