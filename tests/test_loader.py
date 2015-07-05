@@ -1,5 +1,6 @@
 import os
 
+import pytest
 from pike.finder import PikeFinder
 from pike.loader import PikeLoader
 from tests import utils
@@ -26,6 +27,10 @@ class TestLoader(object):
     def teardown_method(self, method):
         utils.remove_dir(self.temp_folder)
 
+    def test_load_module_raises_import_error_with_bad_fullname(self):
+        with pytest.raises(ImportError):
+            self.loader.load_module('bam')
+
     def test_is_package(self):
         loader = self.finder.find_module('pike_tests')
         assert loader.is_package()
@@ -33,3 +38,13 @@ class TestLoader(object):
     def test_module_isnt_package(self):
         loader = self.finder.find_module('pike_tests.app')
         assert not loader.is_package()
+
+    def test_load_package_module(self):
+        loader = self.finder.find_module('pike_tests')
+        module = loader.load_module('pike_tests')
+        assert module is not None
+
+    def test_second_load_pulls_previously_loaded_module(self):
+        first_load = self.loader.load_module('pike_tests.app')
+        second_load = self.loader.load_module('pike_tests.app')
+        assert first_load == second_load
