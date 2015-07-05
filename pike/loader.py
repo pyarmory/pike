@@ -34,9 +34,9 @@ class PikeLoader(object):
     def load_module_by_path(self, module_name, path):
         _, ext = os.path.splitext(path)
         module = None
-        if ext.lower() == '.py':
-            module = imp.load_source(module_name, path)
-        elif ext.lower() == '.pyc':
+        if ext.lower() == '.pyc':
             module = imp.load_compiled(module_name, path)
+        elif ext.lower() == '.py':
+            module = imp.load_source(module_name, path)
 
         return module
