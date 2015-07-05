@@ -10,6 +10,7 @@ class Tracer(object):
     pass
 """
 
+
 class TestLoader(object):
     def setup_method(self, method):
         self.temp_folder = utils.make_tmpdir()
@@ -32,4 +33,3 @@ class TestLoader(object):
     def test_module_isnt_package(self):
         loader = self.finder.find_module('pike_tests.app')
         assert not loader.is_package()
-

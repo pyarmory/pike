@@ -26,4 +26,3 @@ def create_working_package(location):
     write_file(os.path.join(subpkg_location, '__init__.py'))
 
     return pkg_location
-
