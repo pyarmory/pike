@@ -8,7 +8,11 @@ class PikeLoader(object):
         self.target_module_name = fullname
         self.module_path = module_path
 
-    def is_package(self):
+    def is_package(self, fullname=None):
+        """
+        :param fullname: Not used, but required for Python 3.4
+        """
+
         filename = os.path.basename(self.module_path)
         return filename.startswith('__init__')
 
