@@ -1,3 +1,4 @@
 pytest
+pretend
 flake8
 pytest-cover
