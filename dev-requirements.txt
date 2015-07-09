@@ -1,0 +1,6 @@
+-r test-requirements.txt
+tox
+twine
+sphinx
+sphinx_rtd_theme
+sphinxcontrib-spelling
