@@ -9,6 +9,10 @@ Pike
     :target: https://coveralls.io/r/pyarmory/pike?branch=master
     :alt: Coverage
 
+.. image:: https://readthedocs.org/projects/pyarmory-pike/badge/?version=latest
+    :target: https://readthedocs.org/projects/pyarmory-pike/?badge=latest
+
+
 Pike is a dynamic plugin management library for Python. Unlike most Python
 plugin managers, Pike allows for you to load Python packages from anywhere
 on a filesystem without complicated configuration. This enables applications
