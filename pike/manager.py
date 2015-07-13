@@ -1,4 +1,6 @@
 import sys
+from pike.discovery import filesystem
+from pike.discovery import py
 from pike.finder import PikeFinder
 
 
@@ -33,6 +35,7 @@ class PikeManager(object):
             import module_in_the_package
             mgr.cleanup()
         """
+        self.search_paths = search_paths or []
         self.module_finder = PikeFinder(search_paths)
         self.add_to_meta_path()
 
@@ -58,6 +61,21 @@ class PikeManager(object):
             sys.meta_path.insert(0, self.module_finder)
         else:
             sys.meta_path.append(self.module_finder)
+
+    def get_classes(self, filter_func=None):
+        """Get all classes within modules on the manager's search paths"""
+        all_classes = []
+        for package_name in self.get_package_names():
+            module = py.get_module_by_name(package_name)
+            all_classes.extend(py.get_all_classes(module, filter_func))
+
+        return all_classes
+
+    def get_package_names(self):
+        """Get root package names available on the manager's search paths"""
+        for path in self.search_paths:
+            for package_path in filesystem.find_packages(path):
+                yield filesystem.get_name(package_path)
 
     def __enter__(self):
         return self

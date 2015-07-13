@@ -13,6 +13,12 @@ def is_module(path):
     return path.endswith('.py')
 
 
+def get_name(path):
+    filename = os.path.basename(path)
+    name, _ = os.path.splitext(filename)
+    return name
+
+
 def find_modules(path):
     """Finds all modules located on a path"""
     for pathname in os.listdir(path):

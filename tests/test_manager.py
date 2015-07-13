@@ -1,6 +1,9 @@
+import os
 import sys
+import textwrap
 
 from pike.manager import PikeManager
+from tests import utils
 
 
 def finders_in_meta_path():
@@ -43,3 +46,25 @@ class TestManager(object):
         mgr.cleanup()
         mgr.cleanup()
         assert mgr.module_finder not in sys.meta_path
+
+    def test_get_classes(self):
+        temp_folder = utils.make_tmpdir()
+        pkg_name = 'pike_mgr_classes'
+        pkg_location = utils.create_working_package(temp_folder, pkg_name)
+
+        test_file_content = textwrap.dedent("""
+        class SampleObj(object):
+            pass
+
+        class OtherObj(SampleObj):
+            pass
+        """)
+
+        mod_location = os.path.join(pkg_location, 'app.py')
+        utils.write_file(mod_location, test_file_content)
+
+        classes = []
+        with PikeManager([temp_folder]) as mgr:
+            classes = mgr.get_classes()
+
+        assert len(classes) == 2

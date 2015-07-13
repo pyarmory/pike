@@ -16,8 +16,7 @@ def is_child_of_module(obj, parent):
 
 
 def _import_from_path(path, package_name):
-    filename = os.path.basename(path)
-    module_name, _ = os.path.splitext(filename)
+    module_name = filesystem.get_name(path)
     fullname = '{}.{}'.format(package_name, module_name)
 
     return get_module_by_name(fullname)
