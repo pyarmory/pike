@@ -6,6 +6,7 @@ from pike.discovery import filesystem
 
 
 def get_module_by_name(full_module_name):
+    """Import module by full name"""
     return importlib.import_module(full_module_name)
 
 
@@ -39,6 +40,7 @@ def _child_modules(module):
 
 
 def classes_in_module(module, filter_func=None):
+    """Retrieve classes within a module"""
     finder_filter = filter_func or (lambda x: True)
 
     for name, obj in inspect.getmembers(module):
@@ -47,6 +49,7 @@ def classes_in_module(module, filter_func=None):
 
 
 def get_child_modules(module, recursive=True):
+    """Retrieve child modules"""
     for child_module in _child_modules(module):
         yield child_module
 
@@ -56,6 +59,7 @@ def get_child_modules(module, recursive=True):
 
 
 def get_all_classes(module, filter_func=None):
+    """Retrieve all classes from modules"""
     all_classes = []
 
     # Current module's classes
