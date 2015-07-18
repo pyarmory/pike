@@ -1,6 +1,7 @@
 import os
 import sys
 import imp
+import six
 
 
 class PikeLoader(object):
@@ -43,8 +44,8 @@ class PikeLoader(object):
         _, ext = os.path.splitext(path)
         module = None
 
-        # Python 3.2+ - Try to get the cache filename
-        if sys.version_info >= (3, 2, 0):
+        # Python 3 - Try to get the cache filename
+        if six.PY3:
             compiled_filename = imp.cache_from_source(path)
             if os.path.exists(compiled_filename):
                 path, ext = compiled_filename, '.pyc'
