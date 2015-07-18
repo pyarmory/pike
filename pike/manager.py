@@ -1,4 +1,6 @@
 import sys
+import six
+
 from pike.discovery import filesystem
 from pike.discovery import py
 from pike.finder import PikeFinder
@@ -45,7 +47,7 @@ class PikeManager(object):
         This should be called if an implementer is not using the manager as
         a context manager.
         """
-        if self.module_finder in sys.meta_path:
+        if sys.meta_path and self.module_finder in sys.meta_path:
             sys.meta_path.remove(self.module_finder)
 
     def add_to_meta_path(self):
@@ -57,7 +59,7 @@ class PikeManager(object):
         if self.module_finder in sys.meta_path:
             return
 
-        if sys.version_info >= (3, 1, 0):
+        if six.PY3:
             sys.meta_path.insert(0, self.module_finder)
         else:
             sys.meta_path.append(self.module_finder)

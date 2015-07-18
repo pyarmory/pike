@@ -1,6 +1,6 @@
 import os
 import py_compile
-import sys
+import six
 
 import pytest
 from pike.finder import PikeFinder
@@ -76,7 +76,7 @@ class TestLoaderWithCompiled(object):
         loader = finder.find_module('compile_test.app')
         module = loader.load_module('compile_test.app')
 
-        if sys.version_info >= (3, 2, 0):
+        if six.PY3:
             assert type(module.__loader__).__name__ == 'SourcelessFileLoader'
             assert module.__cached__.endswith('.pyc')
         else:
@@ -89,7 +89,7 @@ class TestLoaderWithCompiled(object):
         loader = finder.find_module('compile_test')
         module = loader.load_module('compile_test')
 
-        if sys.version_info >= (3, 2, 0):
+        if six.PY3:
             assert type(module.__loader__).__name__ == 'SourceFileLoader'
         else:
             assert module.__file__.endswith('__init__.py')
