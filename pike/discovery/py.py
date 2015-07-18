@@ -71,3 +71,16 @@ def get_all_classes(module, filter_func=None):
 
     # TODO(jmvrbanac): Rework this so that we don't have to use a set
     return set(all_classes)
+
+
+def get_all_inherited_classes(module, base_class):
+    """Retrieve all inherited classes from modules
+
+    :param Module module: Module to search under
+    :param Class base_class: Base class to filter results by
+    :return: Set of all available classes
+    """
+    def class_filter(cls):
+        return cls != base_class and issubclass(cls, base_class)
+
+    return get_all_classes(module, class_filter)
