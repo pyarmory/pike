@@ -1,4 +1,6 @@
 import os
+import py_compile
+import sys
 
 import pytest
 from pike.finder import PikeFinder
@@ -48,3 +50,31 @@ class TestLoader(object):
         first_load = self.loader.load_module('pike_tests.app')
         second_load = self.loader.load_module('pike_tests.app')
         assert first_load == second_load
+
+
+class TestLoaderWithCompiled(object):
+    def setup_method(self, method):
+        self.temp_folder = utils.make_tmpdir()
+
+        # Create a simple package
+        self.pkg_location = utils.create_working_package(
+            self.temp_folder,
+            'compile_test'
+        )
+        self.mod_location = os.path.join(self.pkg_location, 'app.py')
+        utils.write_file(self.mod_location, SIMPLE_CLASS)
+
+        py_compile.compile(self.mod_location)
+
+    def teardown_method(self, method):
+        utils.remove_dir(self.temp_folder)
+
+    def test_loading_pyc(self):
+        finder = PikeFinder([self.temp_folder])
+        loader = finder.find_module('compile_test.app')
+        module = loader.load_module('compile_test.app')
+
+        if sys.version_info >= (3, 2, 0):
+            assert module.__cached__.endswith('.pyc')
+        else:
+            assert module.__file__.endswith('app.pyc')
