@@ -71,10 +71,25 @@ class TestLoaderWithCompiled(object):
 
     def test_loading_pyc(self):
         finder = PikeFinder([self.temp_folder])
+
+        # Loading compiled module
         loader = finder.find_module('compile_test.app')
         module = loader.load_module('compile_test.app')
 
         if sys.version_info >= (3, 2, 0):
+            assert type(module.__loader__).__name__ == 'SourcelessFileLoader'
             assert module.__cached__.endswith('.pyc')
         else:
             assert module.__file__.endswith('app.pyc')
+
+    def test_loading_py(self):
+        finder = PikeFinder([self.temp_folder])
+
+        # Loading module source
+        loader = finder.find_module('compile_test')
+        module = loader.load_module('compile_test')
+
+        if sys.version_info >= (3, 2, 0):
+            assert type(module.__loader__).__name__ == 'SourceFileLoader'
+        else:
+            assert module.__file__.endswith('__init__.py')
