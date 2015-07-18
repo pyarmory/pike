@@ -5,8 +5,8 @@ Pike
     :target: https://travis-ci.org/pyarmory/pike
     :alt: Travis CI Build
 
-.. image:: https://coveralls.io/repos/pyarmory/pike/badge.svg?branch=master
-    :target: https://coveralls.io/r/pyarmory/pike?branch=master
+.. image:: http://codecov.io/github/pyarmory/pike/coverage.svg?branch=master
+    :target: http://codecov.io/github/pyarmory/pike?branch=master
     :alt: Coverage
 
 .. image:: https://readthedocs.org/projects/pyarmory-pike/badge/?version=latest
