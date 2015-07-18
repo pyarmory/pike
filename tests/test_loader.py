@@ -51,6 +51,10 @@ class TestLoader(object):
         second_load = self.loader.load_module('pike_tests.app')
         assert first_load == second_load
 
+    def test_load_module_by_path_with_invalid_path(self):
+        module = self.loader.load_module_by_path('name', 'something.bam')
+        assert module is None
+
 
 class TestLoaderWithCompiled(object):
     def setup_method(self, method):

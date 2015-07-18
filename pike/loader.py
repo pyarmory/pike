@@ -55,7 +55,8 @@ class PikeLoader(object):
         elif ext.lower() == '.py':
             module = imp.load_source(module_name, path)
 
-        # Make sure we properly fill-in __path__ and __package__
-        module = self.augment_module(module_name, module)
+        if module:
+            # Make sure we properly fill-in __path__ and __package__
+            module = self.augment_module(module_name, module)
 
         return module
