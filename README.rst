@@ -12,6 +12,10 @@ Pike
 .. image:: https://readthedocs.org/projects/pyarmory-pike/badge/?version=latest
     :target: https://readthedocs.org/projects/pyarmory-pike/?badge=latest
 
+.. image:: https://codeclimate.com/github/pyarmory/pike/badges/gpa.svg
+   :target: https://codeclimate.com/github/pyarmory/pike
+   :alt: Code Climate
+
 
 Pike is a dynamic plugin management library for Python. Unlike most Python
 plugin managers, Pike allows for you to load Python packages from anywhere
