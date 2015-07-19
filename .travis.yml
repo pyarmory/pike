@@ -26,6 +26,7 @@ deploy:
   user: pyarmory
   password:
     secure: kCrsMsT2c8/UcbV4hukx/bOoXaHLlgY1EVYLVyzu9WdOmVDjFICF845VfFIjigbks8JrMPO1jtRJSjui+65yRWUxbPh5BmMDQBcbU18q8y/xUoVGW9fHgalZuWqUms8YOTgGHgUNHhzbRwNEBc1CAaertUiwT6D+u3LLW05O1jZGNMcWeUeIYL7WCzeNVGLWYorgPlwcKOwGef3uZuA9niDHQSHBA/S4Dft/jbXhUBloGIz61Rc0xpASJJRmM2Y2K6uLlJqmvQ/6iQzEUgbAwcK7fkM8QueMXBPRHQhgB/qKB6zgIUu/RjPaJSBQlfbsVxdcva06F1yoaMeE3v5L4Sqb1hrM/YP2+FK8g0I0apD8FFfa6NtqzX3dnQtSgWQsFi89G8uh1c7bCqZpJyI8x/DW0cMnrlzgqbH61C88xRrMWHoD1cEY+VzoyhtqvFdQm1Z+K/YwYbHSvxlX88PoaAfHgYorUzN5aBmaxAQophoUoobWuMxH3N48G7z+4wYlojGM52AkFsU0Ku+2YspdLKhBxm9HEtGujsdPMjARuB8bQZQF55aBfVzmB4vsP8VwkHvb1iVUv5Q1uA+FxVnX8VaP+g8pb9aCLoSxa5BkXm+KWdgTKZPO3cEZ2OPRv0oP5fz3pDkVXY5KhstUTOYObfgs+YO7RMTX+NPdSeUyjmU=
+  distributions: "sdist bdist_wheel"
   on:
     tags: true
     repo: pyarmory/pike
