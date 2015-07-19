@@ -32,6 +32,16 @@ you'll need to manually trigger Pike to cleanup itself when you're done.
     manager.cleanup()
 
 
+Discovery
+----------
+
+Pike also includes a set of discovery functions to allow for someone to find
+modules or classes that have been imported or that are available on a filesystem.
+
+* Documentation for imported module discovery: :mod:`pike.discovery.py`
+* Documentation for filesystem discovery: :mod:`pike.discovery.filesystem`
+
+
 Installation
 ------------
 
