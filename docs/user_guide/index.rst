@@ -45,8 +45,8 @@ modules or classes that have been imported or that are available on a filesystem
 Installation
 ------------
 
-Install from PyPI (coming soon)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install from PyPI
+^^^^^^^^^^^^^^^^^
 
 .. code-block:: shell
 
