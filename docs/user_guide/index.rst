@@ -1,8 +1,66 @@
 User Guide
 ==========
 
-.. toctree::
-   :maxdepth: 2
+Get Started
+-----------
 
-   install
-   getting_started
+The common use-case for Pike is to enable dynamic loading of Python packages
+from various locations on a user's filesystem. This is usually to facilitate
+the usage of plugins.
+
+The easiest way to use Pike to load Python packages is to use it as a context
+manager:
+
+.. code-block:: python
+
+    from pike.manager import PikeManager
+
+    with PikeManager(['/path/containing/python/packages']) as mgr:
+        classes = mgr.get_classes()
+
+
+If you need to use Pike for an extended period of time (such as for testing),
+you can use a normal instance of Pike. However, the downside to that is that
+you'll need to manually trigger Pike to cleanup itself when you're done.
+
+.. code-block:: python
+
+    from pike.manager import PikeManager
+
+    manager = PikeManager(['/path/containing/python/packages'])
+    classes = manager.get_classes()
+    manager.cleanup()
+
+
+Installation
+------------
+
+Install from PyPI (coming soon)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: shell
+
+    pip install --upgrade pike
+
+Install from source
+^^^^^^^^^^^^^^^^^^^
+
+You can find the source for Pike located on GitHub_. Once downloaded you can
+install Pike using pip.
+
+If you want to just do a normal source install of Pike the execute:
+
+.. code-block:: shell
+
+    # In the Pike source directory
+    pip install .
+
+If you want to make changes to Pike, then install execute:
+
+.. code-block:: shell
+
+    # In the Pike source directory
+    pip install -e .
+
+
+.. _GitHub: https://github.com/pyarmory/pike
