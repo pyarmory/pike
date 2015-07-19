@@ -65,7 +65,11 @@ class PikeManager(object):
             sys.meta_path.append(self.module_finder)
 
     def get_classes(self, filter_func=None):
-        """Get all classes within modules on the manager's search paths"""
+        """Get all classes within modules on the manager's search paths
+
+        :param Function filter_func: Custom filter function(cls_obj).
+        :returns: :class:`List` of all found classes
+        """
         all_classes = []
         for package_name in self.get_package_names():
             module = py.get_module_by_name(package_name)
@@ -74,7 +78,10 @@ class PikeManager(object):
         return all_classes
 
     def get_package_names(self):
-        """Get root package names available on the manager's search paths"""
+        """Get root package names available on the manager's search paths
+
+        :returns: :class:`generator` providing available package names.
+        """
         for path in self.search_paths:
             for package_path in filesystem.find_packages(path):
                 yield filesystem.get_name(package_path)

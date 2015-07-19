@@ -6,7 +6,11 @@ from pike.discovery import filesystem
 
 
 def get_module_by_name(full_module_name):
-    """Import module by full name"""
+    """Import module by full name
+
+    :param str full_module_name: Full module name e.g. (pike.discovery.py)
+    :return: Imported :class:`module`
+    """
     return importlib.import_module(full_module_name)
 
 
@@ -39,7 +43,12 @@ def _child_modules(module):
 
 
 def classes_in_module(module, filter_func=None):
-    """Retrieve classes within a module"""
+    """Retrieve classes within a module
+
+    :param module module: Module to search under
+    :param Function filter_func: Custom filter function(cls_obj).
+    :return: :class:`generator` containing classes within a module
+    """
     finder_filter = filter_func or (lambda x: True)
 
     for name, obj in inspect.getmembers(module):
@@ -48,7 +57,12 @@ def classes_in_module(module, filter_func=None):
 
 
 def get_child_modules(module, recursive=True):
-    """Retrieve child modules"""
+    """Retrieve child modules
+
+    :param module module: Module to search under
+    :param bool recursive: Toggles the retrieval of sub-children module.
+    :return: :class:`generator` containing child modules
+    """
     for child_module in _child_modules(module):
         yield child_module
 
@@ -58,7 +72,12 @@ def get_child_modules(module, recursive=True):
 
 
 def get_all_classes(module, filter_func=None):
-    """Retrieve all classes from modules"""
+    """Retrieve all classes from modules
+
+    :param module module: Module to search under
+    :param Function filter_func: Custom filter function(cls_obj).
+    :returns: :class:`Set` of all found classes
+    """
     all_classes = []
 
     # Current module's classes
@@ -76,9 +95,9 @@ def get_all_classes(module, filter_func=None):
 def get_all_inherited_classes(module, base_class):
     """Retrieve all inherited classes from modules
 
-    :param Module module: Module to search under
+    :param module module: Module to search under
     :param Class base_class: Base class to filter results by
-    :return: Set of all available classes
+    :return: :class:`Set` of all found classes
     """
     def class_filter(cls):
         return cls != base_class and issubclass(cls, base_class)
