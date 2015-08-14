@@ -3,6 +3,7 @@ import sys
 import textwrap
 
 from pike.manager import PikeManager
+from pike.discovery import py
 from tests import utils
 
 
@@ -68,3 +69,26 @@ class TestManager(object):
             classes = mgr.get_classes()
 
         assert len(classes) == 2
+
+    def test_get_inherited_classes(self):
+        temp_folder = utils.make_tmpdir()
+        pkg_name = 'pike_mgr_inherited_classes'
+        pkg_location = utils.create_working_package(temp_folder, pkg_name)
+
+        test_file_content = textwrap.dedent("""
+        class SampleObj(object):
+            pass
+
+        class OtherObj(SampleObj):
+            pass
+        """)
+
+        mod_location = os.path.join(pkg_location, 'app.py')
+        utils.write_file(mod_location, test_file_content)
+
+        classes = []
+        with PikeManager([temp_folder]) as mgr:
+            app = py.get_module_by_name('{}.app'.format(pkg_name))
+            classes = mgr.get_all_inherited_classes(app.SampleObj)
+
+        assert len(classes) == 1

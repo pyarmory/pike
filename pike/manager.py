@@ -77,6 +77,20 @@ class PikeManager(object):
 
         return all_classes
 
+    def get_all_inherited_classes(self, base_class):
+        """Retrieve all inherited classes from manager's search paths
+
+        :param Class base_class: Base class to filter results by
+        :return: :class:`List` of all found classes
+        """
+        all_classes = []
+        for package_name in self.get_package_names():
+            module = py.get_module_by_name(package_name)
+            inherited = py.get_all_inherited_classes(module, base_class)
+            all_classes.extend(inherited)
+
+        return all_classes
+
     def get_package_names(self):
         """Get root package names available on the manager's search paths
 
