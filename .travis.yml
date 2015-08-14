@@ -16,7 +16,7 @@ matrix:
   - python: pypy
     env: TOXENV=pypy
 install:
-- pip install tox codecov
+- pip install tox codecov twine
 script:
 - tox -e $TOXENV
 after_success:
