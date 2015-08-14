@@ -76,7 +76,7 @@ def get_all_classes(module, filter_func=None):
 
     :param module module: Module to search under
     :param Function filter_func: Custom filter function(cls_obj).
-    :returns: :class:`Set` of all found classes
+    :returns: :class:`List` of all found classes
     """
     all_classes = []
 
@@ -89,7 +89,7 @@ def get_all_classes(module, filter_func=None):
         all_classes.extend([cls for cls in child_module_classes])
 
     # TODO(jmvrbanac): Rework this so that we don't have to use a set
-    return set(all_classes)
+    return list(set(all_classes))
 
 
 def get_all_inherited_classes(module, base_class):
@@ -97,7 +97,7 @@ def get_all_inherited_classes(module, base_class):
 
     :param module module: Module to search under
     :param Class base_class: Base class to filter results by
-    :return: :class:`Set` of all found classes
+    :return: :class:`List` of all found classes
     """
     def class_filter(cls):
         return cls != base_class and issubclass(cls, base_class)
