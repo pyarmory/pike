@@ -44,16 +44,17 @@ class PikeLoader(object):
         _, ext = os.path.splitext(path)
         module = None
 
+        # FIXME(jmvrbanac): Get this working properly in PY3
         # Python 3 - Try to get the cache filename
-        if six.PY3:
-            compiled_filename = imp.cache_from_source(path)
-            if os.path.exists(compiled_filename):
-                path, ext = compiled_filename, '.pyc'
+        # if six.PY3:
+        #     compiled_filename = imp.cache_from_source(path)
+        #     if os.path.exists(compiled_filename):
+        #         path, ext = compiled_filename, '.pyc'
 
-        if ext.lower() == '.pyc':
-            module = imp.load_compiled(module_name, path)
-        elif ext.lower() == '.py':
-            module = imp.load_source(module_name, path)
+        # if ext.lower() == '.pyc':
+        #     module = imp.load_compiled(module_name, path)
+        # elif ext.lower() == '.py':
+        module = imp.load_source(module_name, path)
 
         if module:
             # Make sure we properly fill-in __path__ and __package__
