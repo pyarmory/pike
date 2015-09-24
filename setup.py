@@ -6,7 +6,7 @@ with open('README.rst') as f:
 
 setup(
     name='pike',
-    version='0.0.2',
+    version='0.0.3',
     description=('Lightweight plugin management system for Python'),
     long_description=desc,
     url='https://github.com/pyarmory/pike',
