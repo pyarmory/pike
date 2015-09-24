@@ -56,6 +56,19 @@ def classes_in_module(module, filter_func=None):
             yield obj
 
 
+def get_inherited_classes(module, base_class):
+    """Retrieve inherited classes from a single module
+
+    :param module module: Module to search under
+    :param Class base_class: Base class to filter results by
+    :return: :class:`List` of all found classes
+    """
+    def class_filter(cls):
+        return cls != base_class and issubclass(cls, base_class)
+
+    return list(classes_in_module(module, class_filter))
+
+
 def get_child_modules(module, recursive=True):
     """Retrieve child modules
 

@@ -107,3 +107,10 @@ class TestDiscoverClasses(BaseTestCase):
 
         classes = py.get_all_inherited_classes(module, test_base_class)
         assert len(classes) == 1
+
+    def test_get_inherited_classes(self):
+        module = py.get_module_by_name('{}.app'.format(self.pkg_name))
+        test_base_class = getattr(module, 'SampleObj')
+
+        classes = py.get_inherited_classes(module, test_base_class)
+        assert len(classes) == 1

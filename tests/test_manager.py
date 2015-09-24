@@ -64,11 +64,19 @@ class TestManager(object):
         mod_location = os.path.join(pkg_location, 'app.py')
         utils.write_file(mod_location, test_file_content)
 
+        # Include module directly on the search path
+        second_file = textwrap.dedent("""
+        class AnotherObj(object):
+            pass
+        """)
+        mod_location = os.path.join(temp_folder, 'more.py')
+        utils.write_file(mod_location, second_file)
+
         classes = []
         with PikeManager([temp_folder]) as mgr:
             classes = mgr.get_classes()
 
-        assert len(classes) == 2
+        assert len(classes) == 3
 
     def test_get_inherited_classes(self):
         temp_folder = utils.make_tmpdir()
@@ -85,6 +93,14 @@ class TestManager(object):
 
         mod_location = os.path.join(pkg_location, 'app.py')
         utils.write_file(mod_location, test_file_content)
+
+        # Include module directly on the search path
+        second_file = textwrap.dedent("""
+        class AnotherObj(object):
+            pass
+        """)
+        mod_location = os.path.join(temp_folder, 'more.py')
+        utils.write_file(mod_location, second_file)
 
         classes = []
         with PikeManager([temp_folder]) as mgr:

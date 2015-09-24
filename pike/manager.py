@@ -71,8 +71,14 @@ class PikeManager(object):
         :returns: :class:`List` of all found classes
         """
         all_classes = []
-        for package_name in self.get_package_names():
-            module = py.get_module_by_name(package_name)
+        # Top-most Modules
+        for module_name in self.get_module_names():
+            module = py.get_module_by_name(module_name)
+            all_classes.extend(py.classes_in_module(module, filter_func))
+
+        # All packages
+        for module_name in self.get_package_names():
+            module = py.get_module_by_name(module_name)
             all_classes.extend(py.get_all_classes(module, filter_func))
 
         return all_classes
@@ -84,12 +90,27 @@ class PikeManager(object):
         :return: :class:`List` of all found classes
         """
         all_classes = []
-        for package_name in self.get_package_names():
-            module = py.get_module_by_name(package_name)
+        # Top-most Modules
+        for module_name in self.get_module_names():
+            module = py.get_module_by_name(module_name)
+            all_classes.extend(py.get_inherited_classes(module, base_class))
+
+        # All packages
+        for module_name in self.get_package_names():
+            module = py.get_module_by_name(module_name)
             inherited = py.get_all_inherited_classes(module, base_class)
             all_classes.extend(inherited)
 
         return all_classes
+
+    def get_module_names(self):
+        """Get root module names available on the manager's search paths
+
+        :returns: :class:`generator` providing available module names.
+        """
+        for path in self.search_paths:
+            for package_path in filesystem.find_modules(path):
+                yield filesystem.get_name(package_path)
 
     def get_package_names(self):
         """Get root package names available on the manager's search paths
