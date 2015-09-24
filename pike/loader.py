@@ -1,7 +1,6 @@
 import os
 import sys
 import imp
-import six
 
 
 class PikeLoader(object):
@@ -54,7 +53,8 @@ class PikeLoader(object):
         # if ext.lower() == '.pyc':
         #     module = imp.load_compiled(module_name, path)
         # elif ext.lower() == '.py':
-        module = imp.load_source(module_name, path)
+        if ext.lower() == '.py':
+            module = imp.load_source(module_name, path)
 
         if module:
             # Make sure we properly fill-in __path__ and __package__

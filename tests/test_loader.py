@@ -73,6 +73,7 @@ class TestLoaderWithCompiled(object):
     def teardown_method(self, method):
         utils.remove_dir(self.temp_folder)
 
+    @pytest.skip('pyc loading is disabled')
     def test_loading_pyc(self):
         finder = PikeFinder([self.temp_folder])
 
