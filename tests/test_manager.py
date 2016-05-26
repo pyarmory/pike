@@ -78,7 +78,6 @@ class TestManager(object):
 
         assert len(classes) == 3
 
-
     def test_get_classes_with_fixtures(self, pike_tmp_package):
         """Structurally the same than test_get_classes, but with fixtures
            (see conftest.py)
@@ -88,7 +87,6 @@ class TestManager(object):
             classes = mgr.get_classes()
 
         assert len(classes) == 3
-
 
     def test_get_inherited_classes(self):
         temp_folder = utils.make_tmpdir()
@@ -120,7 +118,6 @@ class TestManager(object):
             classes = mgr.get_all_inherited_classes(app.SampleObj)
 
         assert len(classes) == 1
-
 
     def test_get_inherited_classes_with_fixtures(self, pike_tmp_package):
         """Structurally the same than test_get_inherited_classes, but with fixtures

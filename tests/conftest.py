@@ -7,7 +7,7 @@ import textwrap
 
 
 # Default test dir:
-PIKE_TEST_DIR='pike_tests'
+PIKE_TEST_DIR = 'pike_tests'
 
 
 # ------------------------------------------------------------
@@ -38,8 +38,8 @@ def pike_tmp_package(pike_init_py):
 
        :param pike_init_py: fixture with py.path.local object pointing to
                             directory with empty __init__.py
-       :return: temporary directory path to the package (containing __init__.py,
-                app.py, and more.py)
+       :return: temporary directory path to the package (containing
+                __init__.py,  app.py, and more.py)
 
        HINT: Usually you can find the temporary directory under
              /tmp/pytest-of-$USER/pytest-$NUMBER/$NAME_OF_TEST_FUNCTION/
