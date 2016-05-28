@@ -1,6 +1,9 @@
 
 import pytest
 import textwrap
+from py.path import local
+
+from pike.finder import PikeFinder
 
 
 # Default test dir:
@@ -11,6 +14,16 @@ PIKE_TEST_DIR = 'pike_tests'
 # Fixtures
 #
 # See http://pytest.org/latest/tmpdir.html
+
+@pytest.fixture
+def pike_finder():
+    """Fixture: Return PikeFinder object
+
+    :return: PikeFinder object
+    """
+    finder_path = local(__file__).dirpath().dirpath()
+    return PikeFinder([str(finder_path)])
+
 
 @pytest.fixture
 def pike_init_py(tmpdir):
