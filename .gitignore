@@ -3,12 +3,21 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Editor
+*.kate-swp
+*.~
+*~
+*.swp
+.idea
+
 # C extensions
 *.so
 
 # Distribution / packaging
 .Python
 env/
+.env2/
+.env3/
 build/
 develop-eggs/
 dist/
