@@ -78,6 +78,16 @@ class TestManager(object):
 
         assert len(classes) == 3
 
+    def test_get_classes_with_fixtures(self, pike_tmp_package):
+        """Structurally the same than test_get_classes, but with fixtures
+           (see conftest.py)
+        """
+        classes = []
+        with PikeManager([str(pike_tmp_package)]) as mgr:
+            classes = mgr.get_classes()
+
+        assert len(classes) == 3
+
     def test_get_inherited_classes(self):
         temp_folder = utils.make_tmpdir()
         pkg_name = 'pike_mgr_inherited_classes'
@@ -104,6 +114,20 @@ class TestManager(object):
 
         classes = []
         with PikeManager([temp_folder]) as mgr:
+            app = py.get_module_by_name('{}.app'.format(pkg_name))
+            classes = mgr.get_all_inherited_classes(app.SampleObj)
+
+        assert len(classes) == 1
+
+    def test_get_inherited_classes_with_fixtures(self, pike_tmp_package):
+        """Structurally the same than test_get_inherited_classes, but with fixtures
+           (see conftest.py)
+        """
+        # Actually, this is not really needed.
+        pkg_name = 'pike_mgr_inherited_classes'
+        pike_tmp_package.rename(pike_tmp_package.dirpath() / pkg_name)
+        classes = []
+        with PikeManager([pike_tmp_package.dirname]) as mgr:
             app = py.get_module_by_name('{}.app'.format(pkg_name))
             classes = mgr.get_all_inherited_classes(app.SampleObj)
 
