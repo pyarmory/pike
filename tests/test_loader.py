@@ -1,6 +1,5 @@
 import os
 import py_compile
-import six
 
 import pytest
 from pike.finder import PikeFinder
@@ -99,11 +98,8 @@ def test_loading_pyc(compiled_loader):
     loader = finder.find_module('compile_test.app')
     module = loader.load_module('compile_test.app')
 
-    if six.PY3:
-        assert type(module.__loader__).__name__ == 'SourcelessFileLoader'
-        assert module.__cached__.endswith('.pyc')
-    else:
-        assert module.__file__.endswith('app.pyc')
+    assert type(module.__loader__).__name__ == 'SourcelessFileLoader'
+    assert module.__cached__.endswith('.pyc')
 
 
 def test_loading_py(compiled_loader):
@@ -113,7 +109,4 @@ def test_loading_py(compiled_loader):
     loader = finder.find_module('compile_test')
     module = loader.load_module('compile_test')
 
-    if six.PY3:
-        assert type(module.__loader__).__name__ == 'SourceFileLoader'
-    else:
-        assert module.__file__.endswith('__init__.py')
+    assert type(module.__loader__).__name__ == 'SourceFileLoader'

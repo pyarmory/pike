@@ -1,5 +1,4 @@
 import sys
-import six
 
 from pike.discovery import filesystem
 from pike.discovery import py
@@ -59,10 +58,7 @@ class PikeManager(object):
         if self.module_finder in sys.meta_path:
             return
 
-        if six.PY3:
-            sys.meta_path.insert(0, self.module_finder)
-        else:
-            sys.meta_path.append(self.module_finder)
+        sys.meta_path.insert(0, self.module_finder)
 
     def get_classes(self, filter_func=None):
         """Get all classes within modules on the manager's search paths
