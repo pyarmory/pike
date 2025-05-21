@@ -1,11 +1,12 @@
 import os
 import sys
-import imp
+import importlib.util
+import importlib.abc
 
 
-class PikeLoader(object):
+class PikeLoader(importlib.abc.Loader):
     def __init__(self, fullname, module_path):
-        self.target_module_name = fullname
+        self.fullname = fullname
         self.module_path = module_path
 
     def is_package(self, fullname=None):
@@ -27,15 +28,24 @@ class PikeLoader(object):
 
         return module
 
+    def create_module(self, spec):
+        # Use default module creation semantics
+        return None
+
+    def exec_module(self, module):
+        # Actually execute the code in the module
+        with open(self.module_path, 'rb') as f:
+            code = compile(f.read(), self.module_path, 'exec')
+            exec(code, module.__dict__)
+
     def load_module(self, fullname):
-        if self.target_module_name != fullname:
+        if self.fullname != fullname:
             raise ImportError('Cannot import module with this loader')
 
         if fullname in sys.modules:
             return sys.modules[fullname]
 
         module = self.load_module_by_path(fullname, self.module_path)
-
         sys.modules[fullname] = module
         return module
 
@@ -54,7 +64,12 @@ class PikeLoader(object):
         #     module = imp.load_compiled(module_name, path)
         # elif ext.lower() == '.py':
         if ext.lower() == '.py':
-            module = imp.load_source(module_name, path)
+            spec = importlib.util.spec_from_file_location(module_name, path)
+            if spec is None or spec.loader is None:
+                raise ImportError(f"Cannot load module {module_name} from {path}")
+            module = importlib.util.module_from_spec(spec)
+            sys.modules[module_name] = module  # <-- This is key!
+            spec.loader.exec_module(module)
 
         if module:
             # Make sure we properly fill-in __path__ and __package__

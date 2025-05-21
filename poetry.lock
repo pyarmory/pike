@@ -102,17 +102,17 @@ test = ["pytest (>=6)"]
 
 [[package]]
 name = "flake8"
-version = "5.0.4"
+version = "5.0.3"
 description = "the modular source code checker: pep8 pyflakes and co"
 optional = false
 python-versions = ">=3.6.1"
 files = [
-    {file = "flake8-5.0.4-py2.py3-none-any.whl", hash = "sha256:7a1cf6b73744f5806ab95e526f6f0d8c01c66d7bbe349562d22dfca20610b248"},
-    {file = "flake8-5.0.4.tar.gz", hash = "sha256:6fbe320aad8d6b95cec8b8e47bc933004678dc63095be98528b7bdd2a9f510db"},
+    {file = "flake8-5.0.3-py2.py3-none-any.whl", hash = "sha256:93aa565ae2f0316b95bb57a354f2b2d55ee8508e1fe1cb13b77b9c195b4a2537"},
+    {file = "flake8-5.0.3.tar.gz", hash = "sha256:b27fd7faa8d90aaae763664a489012292990388e5d3604f383b290caefbbc922"},
 ]
 
 [package.dependencies]
-importlib-metadata = {version = ">=1.1.0,<4.3", markers = "python_version < \"3.8\""}
+importlib-metadata = {version = "<4.3", markers = "python_version < \"3.8\""}
 mccabe = ">=0.7.0,<0.8.0"
 pycodestyle = ">=2.9.0,<2.10.0"
 pyflakes = ">=2.5.0,<2.6.0"
@@ -189,13 +189,13 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "pretend"
-version = "1.0.9"
+version = "1.0.8"
 description = "A library for stubbing in Python"
 optional = false
 python-versions = "*"
 files = [
-    {file = "pretend-1.0.9-py2.py3-none-any.whl", hash = "sha256:e389b12b7073604be67845dbe32bf8297360ad9a609b24846fe15d86e0b7dc01"},
-    {file = "pretend-1.0.9.tar.gz", hash = "sha256:c90eb810cde8ebb06dafcb8796f9a95228ce796531bc806e794c2f4649aa1b10"},
+    {file = "pretend-1.0.8-py2.py3-none-any.whl", hash = "sha256:a05f1d5eefad9f1b5471795d993e2e3ee25ebb82c273ca461710ed04d22dc07f"},
+    {file = "pretend-1.0.8.tar.gz", hash = "sha256:930f2c1e18503e8f8c403abe2e02166c4a881941745147e712cdd4f49f3fb964"},
 ]
 
 [[package]]
@@ -221,14 +221,29 @@ files = [
 ]
 
 [[package]]
+name = "pyproject-flake8"
+version = "5.0.3"
+description = "pyproject-flake8 (`pflake8`), a monkey patching wrapper to connect flake8 with pyproject.toml configuration"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pyproject-flake8-5.0.3.tar.gz", hash = "sha256:ed7b579431939b028a57561303cd1e08a0df81f6a7f4286f7ecb040203e0ec85"},
+    {file = "pyproject_flake8-5.0.3-py2.py3-none-any.whl", hash = "sha256:961d64891c2aef8f2128fd141ef08fcb43e34ff35ffe586a129d29825fc8ed86"},
+]
+
+[package.dependencies]
+flake8 = "5.0.3"
+tomli = {version = "*", markers = "python_version < \"3.11\""}
+
+[[package]]
 name = "pytest"
-version = "7.4.4"
+version = "7.4.3"
 description = "pytest: simple powerful testing with Python"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pytest-7.4.4-py3-none-any.whl", hash = "sha256:b090cdf5ed60bf4c45261be03239c2c1c22df034fbffe691abe93cd80cea01d8"},
-    {file = "pytest-7.4.4.tar.gz", hash = "sha256:2cf0005922c6ace4a3e2ec8b4080eb0d9753fdc93107415332f50ce9e7994280"},
+    {file = "pytest-7.4.3-py3-none-any.whl", hash = "sha256:0d009c083ea859a71b76adf7c1d502e4bc170b80a8ef002da5806527b9591fac"},
+    {file = "pytest-7.4.3.tar.gz", hash = "sha256:d989d136982de4e3b29dabcc838ad581c64e8ed52c11fbe86ddebd9da0818cd5"},
 ]
 
 [package.dependencies]
@@ -283,4 +298,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.7"
-content-hash = "d132e5235dae9c312e9be066c8d04594f463f1f1c639e8b24233f4212e749641"
+content-hash = "4dd581cf15cac499c22b463d1a96d7d3c3e7551f55ecebd916483475a7cc75b5"
